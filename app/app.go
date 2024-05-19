@@ -24,7 +24,7 @@ func main() {
 	httpRouter.GET("/", func(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprintln(w, "Hello World")
 	})
-	httpRouter.POST("/user/signup", delivery.SignUp)
+	httpRouter.POST("/user/sign-up", delivery.SignUp)
 	httpRouter.POST("/user/login", delivery.LoginUser)
 
 	httpRouter.POST("/subscribe-premium", delivery.UpdateSubscription)

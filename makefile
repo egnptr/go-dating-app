@@ -1,7 +1,7 @@
 export PKGS=$(shell go list ./...)
 
 lint:
-	@golangcli-lint run $(PKGS) --disable=errcheck --timeout 10m
+	@golangci-lint run $(PKGS) --disable=errcheck --timeout 10m
 
 test:
 	@go test -v -cover -race $(PKGS)
