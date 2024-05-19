@@ -9,5 +9,9 @@ test:
 build:
 	@go build -v -o ./app/go-dating-app ./app/app.go
 
-run: 
+run:
+	make build
+	@./app/go-dating-app
+
+race: 
 	@go run -race ./app/app.go

@@ -1,6 +1,8 @@
 package cache
 
 import (
+	"log"
+
 	"github.com/redis/go-redis/v9"
 )
 
@@ -14,6 +16,10 @@ func NewRedisCache(host string, db int) Repo {
 		Password: "",
 		DB:       db,
 	})
+
+	if client == nil {
+		log.Fatalln("error connecting to redis")
+	}
 
 	return &RedisCache{
 		Client: client,

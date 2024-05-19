@@ -1,12 +1,12 @@
 package model
 
 type User struct {
-	UserID    int64  `json:"id"`
-	Username  string `json:"username"`
-	Password  string `json:"password"`
-	FullName  string `json:"full_name"`
-	Email     string `json:"email"`
-	IsPremium bool   `json:"is_premium"`
+	UserID    int64  `json:"id,omitempty"`
+	Username  string `json:"username,omitempty"`
+	Password  string `json:"password,omitempty"`
+	FullName  string `json:"full_name,omitempty"`
+	Email     string `json:"email,omitempty"`
+	IsPremium bool   `json:"is_premium,omitempty"`
 }
 
 type UserRelation struct {

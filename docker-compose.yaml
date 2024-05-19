@@ -1,0 +1,25 @@
+version: '3.9'
+services:
+  cache:
+    image: redis:latest
+    restart: always
+    ports:
+      - '6379:6379'
+    volumes: 
+      - cache:/data
+  api:
+    container_name: dating-app-api
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      - ENV=production
+      - REDIS_URL=cache:6379
+    depends_on:
+      - cache
+    command: [ "/app/go-dating-app" ]
+volumes:
+  cache:
+    driver: local

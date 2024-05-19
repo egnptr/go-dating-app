@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"net/http"
+	"os"
 
 	controller "github.com/egnptr/dating-app/delivery/http"
 	router "github.com/egnptr/dating-app/pkg/http"
@@ -12,9 +13,14 @@ import (
 )
 
 func main() {
+	redisURL := "127.0.0.1:6379"
+	if os.Getenv("REDIS_URL") != "" {
+		redisURL = os.Getenv("REDIS_URL")
+	}
+
 	var (
 		dbRepo     = db.NewSQLiteRepository()
-		cacheRepo  = cache.NewRedisCache("localhost:6379", 1)
+		cacheRepo  = cache.NewRedisCache(redisURL, 1)
 		service    = usecase.NewUsecase(dbRepo, cacheRepo)
 		delivery   = controller.NewPostController(service)
 		httpRouter = router.NewMuxRouter()
