@@ -30,7 +30,7 @@ func main() {
 	httpRouter.POST("/subscribe-premium", delivery.UpdateSubscription)
 	httpRouter.POST("/unsubscribe-premium", delivery.UpdateSubscription)
 	httpRouter.GET("/related-profiles", delivery.GetProfiles)
-	httpRouter.GET("/swipe", delivery.Swipe)
+	httpRouter.POST("/swipe", delivery.Swipe)
 
 	httpRouter.SERVE(port)
 }
