@@ -1,19 +1,21 @@
 package cache
 
 import (
-	"time"
+	"github.com/redis/go-redis/v9"
 )
 
 type RedisCache struct {
-	host    string
-	db      int
-	expires time.Duration
+	Client *redis.Client
 }
 
-func NewRedisCache(host string, db int, expires time.Duration) Repo {
+func NewRedisCache(host string, db int) Repo {
+	client := redis.NewClient(&redis.Options{
+		Addr:     host,
+		Password: "",
+		DB:       db,
+	})
+
 	return &RedisCache{
-		host:    host,
-		db:      db,
-		expires: expires,
+		Client: client,
 	}
 }

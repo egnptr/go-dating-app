@@ -14,7 +14,7 @@ import (
 func main() {
 	var (
 		dbRepo     = db.NewSQLiteRepository()
-		cacheRepo  = cache.NewRedisCache("localhost:6379", 1, 10)
+		cacheRepo  = cache.NewRedisCache("localhost:6379", 1)
 		service    = usecase.NewUsecase(dbRepo, cacheRepo)
 		delivery   = controller.NewPostController(service)
 		httpRouter = router.NewMuxRouter()
