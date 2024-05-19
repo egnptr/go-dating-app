@@ -90,14 +90,18 @@ func (*sqliteRepo) GetRelatedUser(ctx context.Context, id int64) ([]model.User, 
 	for rows.Next() {
 		var id int64
 		var fullName string
-		err = rows.Scan(&id, &fullName)
+		var email string
+		var isPremium bool
+		err = rows.Scan(&id, &fullName, &email, &isPremium)
 		if err != nil {
 			log.Println(err.Error())
 			return nil, err
 		}
 		user := model.User{
-			UserID:   id,
-			FullName: fullName,
+			UserID:    id,
+			FullName:  fullName,
+			Email:     email,
+			IsPremium: isPremium,
 		}
 		users = append(users, user)
 	}

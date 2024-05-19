@@ -43,7 +43,7 @@ const (
 	`
 
 	getRelatedUserBasedOnID = `
-		SELECT id, full_name FROM users
+		SELECT id, full_name, email, is_premium FROM users
 		WHERE id <> $1
 	`
 )
