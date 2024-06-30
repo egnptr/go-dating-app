@@ -7,14 +7,7 @@ import (
 
 	"github.com/egnptr/dating-app/model"
 	"github.com/egnptr/dating-app/pkg/util"
-	"github.com/egnptr/dating-app/repository/cache"
-	"github.com/egnptr/dating-app/repository/db"
 )
-
-type usecase struct {
-	RepoDB    db.Repo
-	RepoCache cache.Repo
-}
 
 func (s *usecase) CreateUser(ctx context.Context, req model.User) (err error) {
 	var hashedPassword string

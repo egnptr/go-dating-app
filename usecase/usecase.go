@@ -17,6 +17,11 @@ type Usecases interface {
 	Swipe(ctx context.Context, req model.SwipeRequest) (err error)
 }
 
+type usecase struct {
+	RepoDB    db.Repo
+	RepoCache cache.Repo
+}
+
 func NewUsecase(db db.Repo, cache cache.Repo) Usecases {
 	return &usecase{
 		RepoDB:    db,

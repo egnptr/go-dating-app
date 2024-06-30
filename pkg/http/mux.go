@@ -7,29 +7,31 @@ import (
 	"github.com/gorilla/mux"
 )
 
-type muxRouter struct{}
-
-var (
-	muxDispatcher = mux.NewRouter()
-)
+type muxRouter struct {
+	Router *mux.Router
+}
 
 func NewMuxRouter() Router {
-	return &muxRouter{}
+	mux := mux.NewRouter()
+
+	return &muxRouter{
+		Router: mux,
+	}
 }
 
-func (*muxRouter) GET(uri string, f func(w http.ResponseWriter, r *http.Request)) {
-	muxDispatcher.HandleFunc(uri, f).Methods("GET")
+func (m *muxRouter) GET(uri string, f func(w http.ResponseWriter, r *http.Request)) {
+	m.Router.HandleFunc(uri, f).Methods("GET")
 }
 
-func (*muxRouter) POST(uri string, f func(w http.ResponseWriter, r *http.Request)) {
-	muxDispatcher.HandleFunc(uri, f).Methods("POST")
+func (m *muxRouter) POST(uri string, f func(w http.ResponseWriter, r *http.Request)) {
+	m.Router.HandleFunc(uri, f).Methods("POST")
 }
 
-func (*muxRouter) DELETE(uri string, f func(w http.ResponseWriter, r *http.Request)) {
-	muxDispatcher.HandleFunc(uri, f).Methods("DELETE")
+func (m *muxRouter) DELETE(uri string, f func(w http.ResponseWriter, r *http.Request)) {
+	m.Router.HandleFunc(uri, f).Methods("DELETE")
 }
 
-func (*muxRouter) SERVE(port string) {
+func (m *muxRouter) SERVE(port string) {
 	fmt.Printf("HTTP server running on port %v\n", port)
-	http.ListenAndServe(port, muxDispatcher)
+	http.ListenAndServe(port, m.Router)
 }
